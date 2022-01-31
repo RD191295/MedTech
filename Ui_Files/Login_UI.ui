@@ -1,23 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--suppress GrazieInspection, GrazieInspection -->
-zieInspection -->
-zieInspection -->
-zieInspection -->
-zieInspection -->
-zieInspection -->
-zieInspection -->
-zieInspection -->
-zieInspection -->
-zieInspection -->
-zieInspection -->
-zieInspection -->
-zieInspection -->
-zieInspection -->
-zieInspection -->
-zieInspection -->
-zieInspection -->
-zieInspection -->
-zieInspection -->
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
@@ -375,7 +356,7 @@ QPushButton#btn_facebook:pressed, #btn_twitter:pressed, #btn_github:pressed, #bt
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="Images_Resource.qrc">
+                <iconset resource="../Images_Resource.qrc">
                  <normaloff>:/icons/images/icons/icon_settings.png</normaloff>:/icons/images/icons/icon_settings.png</iconset>
                </property>
               </widget>
@@ -398,7 +379,7 @@ QPushButton#btn_facebook:pressed, #btn_twitter:pressed, #btn_github:pressed, #bt
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="Images_Resource.qrc">
+                <iconset resource="../Images_Resource.qrc">
                  <normaloff>:/icons/images/icons/icon_minimize.png</normaloff>:/icons/images/icons/icon_minimize.png</iconset>
                </property>
               </widget>
@@ -421,7 +402,7 @@ QPushButton#btn_facebook:pressed, #btn_twitter:pressed, #btn_github:pressed, #bt
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="Images_Resource.qrc">
+                <iconset resource="../Images_Resource.qrc">
                  <normaloff>:/icons/images/icons/icon_close.png</normaloff>:/icons/images/icons/icon_close.png</iconset>
                </property>
               </widget>
@@ -1076,7 +1057,7 @@ font: 75 10pt &quot;MS Shell Dlg 2&quot;;
   </widget>
  </widget>
  <resources>
-  <include location="Images_Resource.qrc"/>
+  <include location="../Images_Resource.qrc"/>
  </resources>
  <connections/>
 </ui>

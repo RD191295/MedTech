@@ -250,7 +250,7 @@ Content App */
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="Images_Resource.qrc">
+                <iconset resource="../Images_Resource.qrc">
                  <normaloff>:/icons/images/icons/icon_minimize.png</normaloff>:/icons/images/icons/icon_minimize.png</iconset>
                </property>
               </widget>
@@ -273,7 +273,7 @@ Content App */
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="Images_Resource.qrc">
+                <iconset resource="../Images_Resource.qrc">
                  <normaloff>:/icons/images/icons/icon_close.png</normaloff>:/icons/images/icons/icon_close.png</iconset>
                </property>
               </widget>
@@ -393,7 +393,7 @@ QPlainTextEdit:focus {
              <string>Book Other Test</string>
             </property>
             <property name="icon">
-             <iconset resource="Images_Resource.qrc">
+             <iconset resource="../Images_Resource.qrc">
               <normaloff>:/icons/images/icons/cil-action-redo.png</normaloff>:/icons/images/icons/cil-action-redo.png</iconset>
             </property>
            </widget>
@@ -416,7 +416,7 @@ QPlainTextEdit:focus {
              <string>View Invoice</string>
             </property>
             <property name="icon">
-             <iconset resource="Images_Resource.qrc">
+             <iconset resource="../Images_Resource.qrc">
               <normaloff>:/icons/images/icons/cil-view-module.png</normaloff>:/icons/images/icons/cil-view-module.png</iconset>
             </property>
            </widget>
@@ -439,7 +439,7 @@ QPlainTextEdit:focus {
              <string>Cancel</string>
             </property>
             <property name="icon">
-             <iconset resource="Images_Resource.qrc">
+             <iconset resource="../Images_Resource.qrc">
               <normaloff>:/icons/images/icons/icon_close.png</normaloff>:/icons/images/icons/icon_close.png</iconset>
             </property>
            </widget>
@@ -507,7 +507,7 @@ QPlainTextEdit:focus {
   </widget>
  </widget>
  <resources>
-  <include location="Images_Resource.qrc"/>
+  <include location="../Images_Resource.qrc"/>
  </resources>
  <connections/>
 </ui>
