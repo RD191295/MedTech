@@ -1,2 +1,2 @@
 # MedTech
-App For Booking Appointment With Doctor, Book Lab Test Etc.
+This is Prototype App For Booking Appointment With Doctor, Book Lab Test order medicine etc.
