@@ -263,7 +263,10 @@
     <file>images/icons/icon_settings.png</file>
   </qresource>
   <qresource prefix="/images">
+    <file>images/images/MedTech_Promo.gif</file>
+    <file>images/images/MedTech-logos_v1.jpg</file>
     <file>images/images/B12_D3_Test_hover.png</file>
+    <file>images/images/MedTech-logos.jpeg</file>
     <file>images/images/Cancer Screening_hover.png</file>
     <file>images/images/Covid19_hover.png</file>
     <file>images/images/DengueTest_hover.png</file>
