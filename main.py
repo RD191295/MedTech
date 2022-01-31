@@ -1,3 +1,20 @@
+# ///////////////////////////////////////////////////////////////
+#
+# BY: RAJ DALSANIYA
+# PROJECT MADE WITH: Qt Designer,PySide6 SQLITE3,PDFKIT,OPENPYXL and XLSX2HTML
+# PROJECT NAME: DOCTOR APPOINTMENT AND LAB TEST BOOKING SYSTEM
+# V: 1.0.0
+#
+# This project can be used freely for all uses, as long as they maintain the
+# # respective credits only in the Python scripts, any information in the visual
+# interface (GUI) can be modified without any implication.
+#
+# There are limitations on Qt licenses if you want to use for your products
+# commercially, I recommend reading them on the official website:
+# https://doc.qt.io/qtforpython/licenses.html
+#
+# ///////////////////////////////////////////////////////////////
+
 import sys
 import os
 import io
@@ -21,9 +38,8 @@ counter = 0
 counter_progress = 0
 jumper = 10
 
-
 # LOGIN WINDOW
-# ///////////////////////////////////////////////////////////////
+# ############################################################
 class LoginWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
@@ -173,9 +189,14 @@ class LoginWindow(QMainWindow):
             conn.close()
             print("Signup Successful")
 
+    # MOUSE CLICK EVENTS
+    # ///////////////////////////////////////////////////////////////
+    def mousePressEvent(self, event):
+        # SET DRAG POS WINDOW
+        self.dragPos = event.globalPosition().toPoint()
 
 # SPLASH SCREEN
-# //////////////////////////////////////////////////////////////////
+# ############################################################
 class SplashWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
@@ -234,9 +255,8 @@ class SplashWindow(QMainWindow):
             self.login_window = LoginWindow()
             self.login_window.show()
 
-
-# MAIN APP ------------------------->
-# //////////////////////////////////////////////////////////////////
+# MAIN APP WINDOW
+# ############################################################
 class MainWindow(QMainWindow):
     def __init__(self, email, first_name, last_name, username, Gender, date):
         QMainWindow.__init__(self)
@@ -248,6 +268,11 @@ class MainWindow(QMainWindow):
         self.last_name = last_name
         self.username = username
         self.date = date
+        self.cart_value = 0
+        self.order_medicine_name = []
+        self.order_medicine_quantity = []
+        self.order_medicine_unit_price = []
+        self.order_medicine_total_price = []
 
         self.ui.setupUi(self)
 
@@ -271,13 +296,36 @@ class MainWindow(QMainWindow):
         self.ui.BirthDate_Input.setCursor(Qt.PointingHandCursor)
         self.ui.BirthDate_Input.setCalendarPopup(True)
 
+        # SET WELCOME NOTE
+        self.ui.Label_Welcome.setText("Dear " + self.first_name + " " + self.last_name + ","+"Welcome to the MedTech")
+
+        # SET PROMO GIF
+        # /////////////////////////////////////////////////////////
+        gif_logo = QMovie("images/images/MedTech_Promo.gif")
+        gif_logo.setScaledSize(QSize(1082, 608))
+        self.ui.Promo_Label.setAttribute(Qt.WA_TranslucentBackground)
+        self.ui.Promo_Label.setAlignment(Qt.AlignCenter)
+        self.ui.Promo_Label.setMovie(gif_logo)
+
+        # CREATING OPACITY EFFECT
+        self.opacity_effect = QGraphicsOpacityEffect()
+        self.opacity_effect.setOpacity(0.5)
+
+        # adding opacity effect to the label
+        self.ui.Promo_Label.setGraphicsEffect(self.opacity_effect)
+
+        gif_logo.start()
+
         # BUTTON CLICK FOR DIFFERENT WINDOWS
+        self.ui.btn_home.clicked.connect(self.btnevent)
         self.ui.btn_profile.clicked.connect(self.btnevent)
         self.ui.btn_labtest.clicked.connect(self.btnevent)
         self.ui.btn_logout.clicked.connect(self.btnevent)
         self.ui.btn_details_save.clicked.connect(self.btnevent)
         self.ui.btn_appointment.clicked.connect(self.btnevent)
         self.ui.btn_search.clicked.connect(self.btnevent)
+        self.ui.btn_medicine.clicked.connect(self.btnevent)
+        self.ui.btn_search_Medicine.clicked.connect(self.btnevent)
 
         # LAB TEST BTN EVENT
         self.ui.btn_covid.clicked.connect(self.btnevent)
@@ -294,6 +342,9 @@ class MainWindow(QMainWindow):
         self.ui.btn_lungs.clicked.connect(self.btnevent)
         self.ui.btn_stress.clicked.connect(self.btnevent)
         self.ui.btn_thyroid.clicked.connect(self.btnevent)
+
+        # MEDICINE ORDER EVENT
+        self.ui.btn_order.clicked.connect(self.btnevent)
 
         self.ui.Gender_Input.activated[int].connect(self.getvalue)
         self.ui.UserName_Input.textChanged.connect(self.uservalue)
@@ -331,6 +382,11 @@ class MainWindow(QMainWindow):
         btn = self.sender()
         btn_name = btn.objectName()
 
+        if btn_name == "btn_home":
+            self.ui.stackedWidget.setCurrentWidget(self.ui.Home_Page)
+            UIFunctions_main.resetStyle(self, "btn_home")
+            btn.setStyleSheet(UIFunctions_main.selectMenu(btn.styleSheet()))
+
         if btn_name == "btn_profile":
             self.ui.stackedWidget.setCurrentWidget(self.ui.Profile_Page)
             UIFunctions_main.resetStyle(self, "btn_profile")
@@ -344,6 +400,11 @@ class MainWindow(QMainWindow):
         if btn_name == "btn_appointment":
             self.ui.stackedWidget.setCurrentWidget(self.ui.Appointment_Page)
             UIFunctions_main.resetStyle(self, "btn_appointment")
+            btn.setStyleSheet(UIFunctions_main.selectMenu(btn.styleSheet()))
+
+        if btn_name == "btn_medicine":
+            self.ui.stackedWidget.setCurrentWidget(self.ui.Medicine_Order)
+            UIFunctions_main.resetStyle(self, "btn_medicine")
             btn.setStyleSheet(UIFunctions_main.selectMenu(btn.styleSheet()))
 
         if btn_name == "btn_logout":
@@ -455,6 +516,122 @@ class MainWindow(QMainWindow):
                 else:
                     pass
 
+        if btn_name == "btn_search_Medicine":
+            self.medicine_search_query = self.ui.medicine_search.text()
+            self.ui.SearchMedicine.clear()
+            conn = sqlite3.connect('user_data.db')
+            cur = conn.cursor()
+            cur.execute("SELECT * FROM Medicine_Stock_Data")
+            data = cur.fetchall()
+            for d in data:
+                if self.medicine_search_query.startswith(d[1][0:3].lower()) or self.medicine_search_query.startswith(d[1][0:3].upper()):
+                    item_medicine = QListWidgetItem(self.ui.SearchMedicine)
+                    self.ui.SearchMedicine.addItem(item_medicine)
+                    row_medicine = Med_Details_Widget()
+                    item_medicine.setSizeHint(row_medicine.minimumSizeHint())
+                    self.ui.SearchMedicine.setItemWidget(item_medicine, row_medicine)
+                    row_medicine.btn_high.clicked.connect(self.quantity_increase)
+                    row_medicine.btn_low.clicked.connect(self.quantity_decrease)
+                    row_medicine.btn_cart.clicked.connect(self.med_to_cart)
+                    row_medicine.Medicine_Name.setText(d[1])
+                    row_medicine.Price_Per_Unit_Input.setText(str(d[3]))
+                    row_medicine.Product_Details_Input.setText(d[4])
+                    row_medicine.Manufacture_Input.setText(d[5])
+                    row_medicine.Consume_Type_Input.setText(d[6])
+                    row_medicine.Composition_Input.setText(d[7])
+                    row_medicine.pic_label.setPixmap(QPixmap("images/images/" + d[8]))
+                else:
+                    pass
+
+        if btn_name == "btn_order":
+            for x in range(self.ui.ordered_List.count()):
+                self.order_medicine_name.append(self.ui.ordered_List.itemWidget(self.ui.ordered_List.item(x)).Medicine_Name.text())
+                self.order_medicine_quantity.append(int(self.ui.ordered_List.itemWidget(self.ui.ordered_List.item(x)).Quantity_Order_Input.text()))
+                self.order_medicine_unit_price.append(float(self.ui.ordered_List.itemWidget(self.ui.ordered_List.item(x)).Price_Per_Unit_Input.text()))
+                self.order_medicine_total_price.append(float(self.ui.ordered_List.itemWidget(self.ui.ordered_List.item(x)).Total_Price_Input.text()))
+                conn = sqlite3.connect('user_data.db')
+                cur = conn.cursor()
+                cur.execute('SELECT Quantity FROM Medicine_Stock_Data WHERE Medicine_Name = \'' + self.order_medicine_name[x] + '\'')
+                quantity_remain = cur.fetchone()[0]- self.order_medicine_quantity[x]
+                cur1 = conn.cursor()
+                cur1.execute('UPDATE Medicine_Stock_Data SET Quantity = ? WHERE Medicine_Name = ?', (quantity_remain, self.order_medicine_name[x]))
+                conn.commit()
+                cur1.close()
+                cur.close()
+            self.order_medicine = OrderInfo(self.first_name,self.last_name,self.cart_value,self.order_medicine_name,self.order_medicine_quantity,self.order_medicine_unit_price,self.order_medicine_total_price)
+            self.order_medicine.show()
+
+    def med_to_cart(self):
+        widget_cart = self.sender()
+        gp_cart = widget_cart.mapToGlobal(QPoint())
+        lp_cart = self.ui.SearchMedicine.viewport().mapFromGlobal(gp_cart)
+        row_cart = self.ui.SearchMedicine.row(self.ui.SearchMedicine.itemAt(lp_cart))
+        self.medicine_name = self.ui.SearchMedicine.itemWidget(self.ui.SearchMedicine.item(row_cart)).Medicine_Name.text()
+        self.quantity_order = int(self.ui.SearchMedicine.itemWidget(self.ui.SearchMedicine.item(row_cart)).Quantity_Order_Input.text())
+        self.unit_price = float(self.ui.SearchMedicine.itemWidget(self.ui.SearchMedicine.item(row_cart)).Price_Per_Unit_Input.text())
+        self.total_price = round(self.quantity_order * self.unit_price,2)
+        self.cart_value = self.cart_value + self.total_price
+
+        conn = sqlite3.connect('user_data.db')
+        cur = conn.cursor()
+        cur.execute('SELECT Medicine_Pic_Name FROM Medicine_Stock_Data where Medicine_Name = \'' + self.medicine_name + '\'')
+        self.file_med_name = cur.fetchall()[0][0]
+
+        # ----------- ADD TO CART ----------------------------
+        cart_medicine =  QListWidgetItem(self.ui.ordered_List)
+        self.ui.ordered_List.addItem(cart_medicine)
+        row_cart_order = cart_details_widget()
+        cart_medicine.setSizeHint(row_cart_order.minimumSizeHint())
+        self.ui.ordered_List.setItemWidget(cart_medicine, row_cart_order)
+        row_cart_order.Medicine_Name.setText(self.medicine_name)
+        row_cart_order.Quantity_Order_Input.setText(str(self.quantity_order))
+        row_cart_order.Price_Per_Unit_Input.setText(str(self.unit_price))
+        row_cart_order.Total_Price_Input.setText(str(self.total_price))
+        row_cart_order.btn_cart.clicked.connect(self.remove_med)
+        row_cart_order.pic_label.setPixmap(QPixmap("images/images/" + self.file_med_name))
+        self.ui.Total_Amount_Input.setText(str(round(self.cart_value,2)))
+
+    def remove_med(self):
+        widget_remove = self.sender()
+        gp_remove = widget_remove.mapToGlobal(QPoint())
+        lp_remove = self.ui.ordered_List.viewport().mapFromGlobal(gp_remove)
+        row_remove = self.ui.ordered_List.row(self.ui.ordered_List.itemAt(lp_remove))
+        self.total_price = round(float(self.ui.ordered_List.itemWidget(self.ui.ordered_List.item(row_remove)).Total_Price_Input.text()),2)
+        self.cart_value = self.cart_value - self.total_price
+        self.ui.Total_Amount_Input.setText(str(round(self.cart_value,2)))
+        self.ui.ordered_List.takeItem(row_remove)
+
+    def quantity_increase(self):
+        widget_med = self.sender()
+        gp_med = widget_med.mapToGlobal(QPoint())
+        lp_med  = self.ui.SearchMedicine.viewport().mapFromGlobal(gp_med)
+        row_med = self.ui.SearchMedicine.row(self.ui.SearchMedicine.itemAt(lp_med))
+        self.medicine_name = self.ui.SearchMedicine.itemWidget(self.ui.SearchMedicine.item(row_med)).Medicine_Name.text()
+        self.quantity_order = int(self.ui.SearchMedicine.itemWidget(self.ui.SearchMedicine.item(row_med)).Quantity_Order_Input.text())
+        conn = sqlite3.connect('user_data.db')
+        cur = conn.cursor()
+        cur.execute('SELECT Quantity FROM Medicine_Stock_Data where Medicine_Name = \'' + self.medicine_name + '\'')
+        quantity= cur.fetchall()[0][0]
+        if self.quantity_order <= quantity:
+            self.quantity_order += 1
+            self.ui.SearchMedicine.itemWidget(self.ui.SearchMedicine.item(row_med)).Quantity_Order_Input.setText(str(self.quantity_order))
+
+    def quantity_decrease(self):
+        widget_med = self.sender()
+        gp_med = widget_med.mapToGlobal(QPoint())
+        lp_med  = self.ui.SearchMedicine.viewport().mapFromGlobal(gp_med)
+        row_med = self.ui.SearchMedicine.row(self.ui.SearchMedicine.itemAt(lp_med))
+        self.medicine_name = self.ui.SearchMedicine.itemWidget(self.ui.SearchMedicine.item(row_med)).Medicine_Name.text()
+        self.quantity_order = int(self.ui.SearchMedicine.itemWidget(self.ui.SearchMedicine.item(row_med)).Quantity_Order_Input.text())
+        conn = sqlite3.connect('user_data.db')
+        cur = conn.cursor()
+        cur.execute('SELECT Quantity FROM Medicine_Stock_Data where Medicine_Name = \'' + self.medicine_name + '\'')
+        quantity= cur.fetchall()[0][0]
+        if quantity >= self.quantity_order > 0:
+            self.quantity_order -= 1
+            self.ui.SearchMedicine.itemWidget(self.ui.SearchMedicine.item(row_med)).Quantity_Order_Input.setText(str(self.quantity_order))
+
+
     def handleButtonClicked(self):
         widget = self.sender()
         gp = widget.mapToGlobal(QPoint())
@@ -479,165 +656,118 @@ class MainWindow(QMainWindow):
     def onDateChanged(self, newdate):
         self.date = newdate
 
+    # MOUSE CLICK EVENTS
+    # ///////////////////////////////////////////////////////////////
+    def mousePressEvent(self, event):
+        # SET DRAG POS WINDOW
+        self.dragPos = event.globalPosition().toPoint()
 
-class MyCustomWidget(QWidget):
-    """
-    Show Doctor's Information after searching particular doctor
-    information from database:
-    1. Doctor's Name
-    2. Doctor's Specialization
-    3. Hospital Name
-    4. charge of doctor
-    5. Doctor's Photo
-    6. Year of experience
-    7. there is one button for booking appointment
-    """
+# ORDER MEDICINE INFO WINDOW
+# ############################################################
+class OrderInfo(QMainWindow):
+    def __init__(self,first_name,last_name,cart_value,order_medicine_name,order_medicine_quantity,order_medicine_unit_price,order_medicine_total_price):
+        QMainWindow.__init__(self)
+        self.first_name = first_name
+        self.last_name = last_name
+        self.cart_value = cart_value
+        self.order_medicine_name = order_medicine_name
+        self.order_medicine_quantity = order_medicine_quantity
+        self.order_medicine_unit_price = order_medicine_unit_price
+        self.order_medicine_total_price = order_medicine_total_price
+        self.mobile_number = None
+        self.city = None
+        self.address = None
+        self.PaymentStatus = "COD"
+        self.Invoice_No = None
 
-    def __init__(self, parent=None):
-        super(MyCustomWidget, self).__init__(parent)
+        self.ui =  ui_Medicine_order_Info.Ui_MainWindow()
+        self.ui.setupUi(self)
 
-        self.bg_horizontal = QHBoxLayout()
-        self.bg_horizontal.setObjectName(u"bg_horizontal")
-        self.bg_horizontal.setContentsMargins(0, 0, 0, 0)
-        self.Doctor_Pic = QLabel()
-        self.Doctor_Pic.setObjectName(u"Doctor_Pic")
-        self.Doctor_Pic.setMinimumSize(QSize(150, 150))
-        self.Doctor_Pic.setMaximumSize(QSize(150, 150))
+        # SET FRAMELESS WINDOW
+        self.setWindowFlags(Qt.FramelessWindowHint)
+        self.setAttribute(Qt.WA_TranslucentBackground)
 
-        self.bg_horizontal.addWidget(self.Doctor_Pic)
+        # SET LABEL AND OTHER INFORMATION
+        self.ui.name_input.setText(self.first_name)
+        self.ui.lastname_input.setText(self.last_name)
+        self.ui.label_title.setText("Dear "+self.first_name+" "+self.last_name + ", You are ordering Medicine With us.")
 
-        self.bg_part_1 = QVBoxLayout()
-        self.bg_part_1.setObjectName(u"bg_part_1")
-        self.Doctor_Name_Layout = QHBoxLayout()
-        self.Doctor_Name_Layout.setObjectName(u"Doctor_Name_Layout")
-        self.Doctor_Name_label = QLabel()
-        self.Doctor_Name_label.setObjectName(u"Doctor_Name_label")
-        self.Doctor_Name_label.setMinimumSize(QSize(140, 45))
-        self.Doctor_Name_label.setMaximumSize(QSize(140, 45))
-        font = QFont()
-        font.setPointSize(14)
-        font.setBold(True)
-        self.Doctor_Name_label.setFont(font)
+        # SET TOTAL PAYMENT AMOUNT
+        self.ui.charge_Input.setText(str(self.cart_value))
 
-        self.Doctor_Name_Layout.addWidget(self.Doctor_Name_label)
+        # MINIMIZE
+        self.ui.minimizeAppBtn.clicked.connect(lambda: self.showMinimized())
 
-        self.Doctor_Name_Input = QLineEdit()
-        self.Doctor_Name_Input.setObjectName(u"Doctor_Name_Input")
-        self.Doctor_Name_Input.setMinimumSize(QSize(180, 45))
-        self.Doctor_Name_Input.setMaximumSize(QSize(180, 45))
+        # CLOSE APPLICATION
+        self.ui.closeAppBtn.clicked.connect(lambda: self.close())
 
-        self.Doctor_Name_Layout.addWidget(self.Doctor_Name_Input)
+        # DROP SHADOW
+        self.shadow = QGraphicsDropShadowEffect(self)
+        self.shadow.setBlurRadius(20)
+        self.shadow.setColor(QColor(0, 0, 0, 180))
+        self.shadow.setOffset(0, 0)
+        self.ui.bgApp.setGraphicsEffect(self.shadow)
 
-        self.bg_part_1.addLayout(self.Doctor_Name_Layout)
+        # BTN CLICK EVENT
+        self.ui.btn_payLater.clicked.connect(self.btnevent)
 
-        self.Speciality_Layout = QHBoxLayout()
-        self.Speciality_Layout.setObjectName(u"Speciality_Layout")
-        self.Speciality_Label = QLabel()
-        self.Speciality_Label.setObjectName(u"Speciality_Label")
-        self.Speciality_Label.setMinimumSize(QSize(140, 45))
-        self.Speciality_Label.setMaximumSize(QSize(140, 45))
-        self.Speciality_Label.setFont(font)
+        # SHOW WINDOW
+        self.show()
 
-        self.Speciality_Layout.addWidget(self.Speciality_Label)
+    def btnevent(self):
+        # SENDER EVENT
+        btn = self.sender()
+        btn_name = btn.objectName()
 
-        self.Speciality_Input = QLineEdit()
-        self.Speciality_Input.setObjectName(u"Speciality_Input")
-        self.Speciality_Input.setMinimumSize(QSize(180, 45))
-        self.Speciality_Input.setMaximumSize(QSize(180, 45))
+        if btn_name == "btn_payLater":
+            self.mobile_number = self.ui.mobile_input.text()
+            self.city = self.ui.city_input.text()
+            self.address = self.ui.address_input.text()
+            if len(self.first_name) == 0 or len(self.last_name) == 0 or len(self.mobile_number) == 0 or len(self.address) == 0 or len(self.city) == 0:
+                print("please enter value")
+            else:
+                conn = sqlite3.connect('user_data.db')
+                cur = conn.cursor()
+                user_info = [self.first_name,self.last_name,self.mobile_number,self.city,self.address,self.cart_value,self.PaymentStatus,]
+                cur.execute(
+                    'INSERT INTO Medicine_Order_Data (FirstName, LastName, MobileNo, City,Address,Charge,PaymentStatus) VALUES (?,?,?,?,?,?,?)',
+                    user_info)
 
-        self.Speciality_Layout.addWidget(self.Speciality_Input)
+                cur1 = conn.cursor()
+                cur1.execute(
+                    'SELECT Id FROM Medicine_Order_Data WHERE MobileNo = \'' + self.mobile_number + '\'')
 
-        self.bg_part_1.addLayout(self.Speciality_Layout)
+                self.Invoice_No = cur1.fetchone()[0]
 
-        self.Hospital_Name_Layout = QHBoxLayout()
-        self.Hospital_Name_Layout.setObjectName(u"Hospital_Name_Layout")
-        self.Hospital_Name_Label = QLabel()
-        self.Hospital_Name_Label.setObjectName(u"Hospital_Name_Label")
-        self.Hospital_Name_Label.setMinimumSize(QSize(140, 45))
-        self.Hospital_Name_Label.setMaximumSize(QSize(140, 45))
-        self.Hospital_Name_Label.setFont(font)
+                conn.commit()
+                conn.close()
+                wb = load_workbook("Invoice/Invoice_Format/Invoice_Format_Medicine_Order.xlsx")
+                ws = wb["Invoice"]
+                for i in range(len(self.order_medicine_name)):
+                    ws["B"+str(i+20)] = self.order_medicine_name[i]
+                    ws["F"+str(i+20)] = self.order_medicine_quantity[i]
+                    ws["D"+str(i+20)] = self.order_medicine_unit_price[i]
+                    ws["H"+str(i+20)] = self.order_medicine_total_price[i]
 
-        self.Hospital_Name_Layout.addWidget(self.Hospital_Name_Label)
+                ws["D10"] = self.first_name + " " + self.last_name
+                ws["D11"] = self.address
+                ws["D12"] = self.city
+                ws["D13"] = self.mobile_number
 
-        self.Hospital_Name_Input = QLineEdit()
-        self.Hospital_Name_Input.setObjectName(u"Hospital_Name_Input")
-        self.Hospital_Name_Input.setMinimumSize(QSize(180, 45))
-        self.Hospital_Name_Input.setMaximumSize(QSize(180, 45))
+                ws["H26"]= self.cart_value
+                ws["H27"] = self.cart_value * 5 /100
+                ws["H28"] = (self.cart_value * 9) / 100
+                ws["H29"] = (self.cart_value * 9) / 100
+                ws["H30"] = (self.cart_value * 18) / 100
+                ws["H34"] = self.cart_value + (self.cart_value * 18) / 100 - (self.cart_value * 5 /100)
+                ws["D6"] = datetime.date.today()
+                ws["B6"] = "INV" + "0000" + str(self.Invoice_No)
+                self.file_name = "INV" +"_MED_"+ "0000" + str(self.Invoice_No)
 
-        self.Hospital_Name_Layout.addWidget(self.Hospital_Name_Input)
-
-        self.bg_part_1.addLayout(self.Hospital_Name_Layout)
-
-        self.bg_horizontal.addLayout(self.bg_part_1)
-
-        self.bg_part_2 = QVBoxLayout()
-        self.bg_part_2.setObjectName(u"bg_part_2")
-        self.YOE_Layout = QHBoxLayout()
-        self.YOE_Layout.setObjectName(u"YOE_Layout")
-        self.Experience_Label = QLabel()
-        self.Experience_Label.setObjectName(u"Experience_Label")
-        self.Experience_Label.setMinimumSize(QSize(190, 45))
-        self.Experience_Label.setMaximumSize(QSize(190, 45))
-        self.Experience_Label.setFont(font)
-
-        self.YOE_Layout.addWidget(self.Experience_Label)
-
-        self.Experience_Input = QLineEdit()
-        self.Experience_Input.setObjectName(u"Experience_Input")
-        self.Experience_Input.setMinimumSize(QSize(190, 45))
-        self.Experience_Input.setMaximumSize(QSize(190, 45))
-
-        self.YOE_Layout.addWidget(self.Experience_Input)
-
-        self.bg_part_2.addLayout(self.YOE_Layout)
-
-        self.charge_Layout = QHBoxLayout()
-        self.charge_Layout.setObjectName(u"charge_Layout")
-        self.Charge_Label = QLabel()
-        self.Charge_Label.setObjectName(u"Charge_Label")
-        self.Charge_Label.setMinimumSize(QSize(190, 45))
-        self.Charge_Label.setMaximumSize(QSize(190, 45))
-        self.Charge_Label.setFont(font)
-
-        self.charge_Layout.addWidget(self.Charge_Label)
-
-        self.Charge_Input = QLineEdit()
-        self.Charge_Input.setObjectName(u"Charge_Input")
-        self.Charge_Input.setMinimumSize(QSize(190, 45))
-        self.Charge_Input.setMaximumSize(QSize(190, 45))
-
-        self.charge_Layout.addWidget(self.Charge_Input)
-
-        self.bg_part_2.addLayout(self.charge_Layout)
-
-        self.btn_layout = QHBoxLayout()
-        self.btn_layout.setObjectName(u"btn_layout")
-        self.btn_space = QSpacerItem(230, 45, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.btn_layout.addItem(self.btn_space)
-
-        self.btn_book = QPushButton()
-        self.btn_book.setObjectName(u"btn_book")
-        self.btn_book.setMinimumSize(QSize(150, 45))
-        self.btn_book.setMaximumSize(QSize(150, 45))
-
-        self.btn_layout.addWidget(self.btn_book)
-
-        self.bg_part_2.addLayout(self.btn_layout)
-
-        self.bg_horizontal.addLayout(self.bg_part_2)
-
-        self.setLayout(self.bg_horizontal)
-
-        # SET LABEL TEXT
-        self.Doctor_Pic.setText("")
-        self.Doctor_Name_label.setText(u"Doctor Name :")
-        self.Speciality_Label.setText(u"Speciality :")
-        self.Hospital_Name_Label.setText(u"Hospital Name:")
-        self.Experience_Label.setText(u"Total Experience :")
-        self.Charge_Label.setText(u"consultation Charge :")
-        self.btn_book.setText(u"Book")
-
+                wb.save("Invoice/Invoice_Lab_Test/Invoice_Excel/" + self.file_name + ".xlsx")
+                self.close()
+                self.process_bar = ProcessBar(self.file_name)
+                self.process_bar.show()
 
 # BOOK SCREEN WINDOW
 # ######################################################
@@ -740,7 +870,7 @@ class BookSlot(QMainWindow):
                 self.Book_Info.show()
 
 # DOCTOR APPOINTMENT BOOKING INFORMATION
-# ##########################################################
+# ######################################################
 class BookInfo(QMainWindow):
     def __init__(self,doctor_name,select_date,consultation_charge,first_name,last_name,email,slot_name,token_count):
         QMainWindow.__init__(self)
@@ -840,7 +970,6 @@ class BookInfo(QMainWindow):
                         self.close()
                         self.process_bar = ProcessBar(self.file_name)
                         self.process_bar.show()
-
 
 # LAB TEST BOOKING CLASS
 # ######################################################
@@ -991,7 +1120,8 @@ class LabTestBook(QMainWindow):
                 self.process_bar = ProcessBar(self.file_name)
                 self.process_bar.show()
 
-
+# PROCESSING WINDOW
+# ########################################################
 class ProcessBar(QMainWindow):
     def __init__(self, file_name):
         QMainWindow.__init__(self)
@@ -1092,7 +1222,7 @@ class ProcessBar(QMainWindow):
         self.ui.circularProgress.setStyleSheet(newStylesheet)
 
 # VIEW PDF BUTTON AND BOOK ANOTHER TEST BUTTON WINDOW
-# #############################################################################
+# ########################################################
 class ViewPdf_btn(QMainWindow):
     def __init__(self, file_name):
         QMainWindow.__init__(self)
@@ -1127,7 +1257,7 @@ class ViewPdf_btn(QMainWindow):
             self.close()
 
 # VIEW PDF WINDOW
-# #############################################################################
+# ########################################################
 class ViewPdf(QMainWindow):
     def __init__(self, file_name):
         QMainWindow.__init__(self)
