@@ -1,3 +1,20 @@
+# ///////////////////////////////////////////////////////////////
+#
+# BY: RAJ DALSANIYA
+# PROJECT MADE WITH: Qt Designer and PySide6
+# PROJECT NAME: DOCTOR APPOINTMENT AND LAB TEST BOOKING SYSTEM
+# V: 1.0.0
+#
+# This project can be used freely for all uses, as long as they maintain the
+# respective credits only in the Python scripts, any information in the visual
+# interface (GUI) can be modified without any implication.
+#
+# There are limitations on Qt licenses if you want to use your products
+# commercially, I recommend reading them on the official website:
+# https://doc.qt.io/qtforpython/licenses.html
+#
+# ///////////////////////////////////////////////////////////////
+
 # IMPORT MAIN FILE
 # /////////////////////////////
 
@@ -202,7 +219,7 @@ class UIFunctions_main(QMainWindow):
         def dobleClickMaximizeRestore(event):
             # IF DOUBLE CLICK CHANGE STATUS
             if event.type() == QEvent.MouseButtonDblClick:
-                QTimer.singleShot(250, lambda: UIFunctions.maximize_restore(self))
+                QTimer.singleShot(250, lambda: UIFunctions_main.maximize_restore(self))
 
         self.ui.titleRightInfo.mouseDoubleClickEvent = dobleClickMaximizeRestore
 

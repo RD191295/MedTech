@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main.ui'
+## Form generated from reading UI file 'mainalnxRP.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.2.2
 ##
@@ -20,7 +20,7 @@ from PySide6.QtWidgets import (QApplication, QComboBox, QDateEdit, QFrame,
     QListWidget, QListWidgetItem, QMainWindow, QPushButton,
     QSizePolicy, QStackedWidget, QTextEdit, QVBoxLayout,
     QWidget)
-from .Images_Resource_rc import *
+from . Images_Resource_rc import *
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -463,7 +463,7 @@ class Ui_MainWindow(object):
 "	border-bottom-right-radius: 3px;	\n"
 "	background-image: url(:/icons/images/icons/cil-arrow-bottom.png);\n"
 "	background-position: center;\n"
-"	background-repeat: no-repeat;\n"
+"	background-repeat: no-reperat;\n"
 " }\n"
 "QComboBox QAbstractItemView {\n"
 "	color: rgb(255, 121, 198);	\n"
@@ -591,7 +591,8 @@ class Ui_MainWindow(object):
 "    background-color: rgba(225, 225, 225, 100);\n"
 "}\n"
 "#qt_calendar_prevmonth:pressed, #qt_calendar_nextmonth:pressed {\n"
-"    background-color: rgba(235, 235, 235, 100);\n"
+"    backgro"
+                        "und-color: rgba(235, 235, 235, 100);\n"
 "}\n"
 "\n"
 "\n"
@@ -705,9 +706,10 @@ class Ui_MainWindow(object):
         self.topLogoInfo.setFrameShadow(QFrame.Raised)
         self.topLogo = QFrame(self.topLogoInfo)
         self.topLogo.setObjectName(u"topLogo")
-        self.topLogo.setGeometry(QRect(10, 5, 42, 42))
-        self.topLogo.setMinimumSize(QSize(42, 42))
-        self.topLogo.setMaximumSize(QSize(42, 42))
+        self.topLogo.setGeometry(QRect(10, 5, 40, 40))
+        self.topLogo.setMinimumSize(QSize(40, 40))
+        self.topLogo.setMaximumSize(QSize(40, 40))
+        self.topLogo.setStyleSheet(u"background-image:url(:/images/images/images/MedTech-logos_v1.jpg)")
         self.topLogo.setFrameShape(QFrame.NoFrame)
         self.topLogo.setFrameShadow(QFrame.Raised)
         self.titleLeftApp = QLabel(self.topLogoInfo)
@@ -797,7 +799,7 @@ class Ui_MainWindow(object):
         self.btn_profile.setFont(font)
         self.btn_profile.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_profile.setLayoutDirection(Qt.LeftToRight)
-        self.btn_profile.setStyleSheet(u"background-image:url(:/icons/images/icons/cli_profile.png)")
+        self.btn_profile.setStyleSheet(u"background-image:url(:/icons/images/icons/cli_profile.png);")
 
         self.verticalLayout_8.addWidget(self.btn_profile)
 
@@ -1189,6 +1191,63 @@ class Ui_MainWindow(object):
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.stackedWidget = QStackedWidget(self.pagesContainer)
         self.stackedWidget.setObjectName(u"stackedWidget")
+        self.Home_Page = QWidget()
+        self.Home_Page.setObjectName(u"Home_Page")
+        self.Home_Layout = QVBoxLayout(self.Home_Page)
+        self.Home_Layout.setSpacing(0)
+        self.Home_Layout.setObjectName(u"Home_Layout")
+        self.Home_Layout.setContentsMargins(0, 0, 0, 0)
+        self.frame_Home = QFrame(self.Home_Page)
+        self.frame_Home.setObjectName(u"frame_Home")
+        self.frame_Home.setFrameShape(QFrame.NoFrame)
+        self.frame_Home.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_20 = QVBoxLayout(self.frame_Home)
+        self.verticalLayout_20.setSpacing(0)
+        self.verticalLayout_20.setObjectName(u"verticalLayout_20")
+        self.verticalLayout_20.setContentsMargins(5, 5, 0, 0)
+        self.frame_Welcome_Note = QFrame(self.frame_Home)
+        self.frame_Welcome_Note.setObjectName(u"frame_Welcome_Note")
+        self.frame_Welcome_Note.setMinimumSize(QSize(0, 40))
+        self.frame_Welcome_Note.setMaximumSize(QSize(16777215, 40))
+        self.frame_Welcome_Note.setFrameShape(QFrame.NoFrame)
+        self.frame_Welcome_Note.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_9 = QHBoxLayout(self.frame_Welcome_Note)
+        self.horizontalLayout_9.setSpacing(0)
+        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
+        self.Label_Welcome = QLabel(self.frame_Welcome_Note)
+        self.Label_Welcome.setObjectName(u"Label_Welcome")
+        self.Label_Welcome.setStyleSheet(u"border-radius:5px;\n"
+"color: rgb(98, 114, 164);\n"
+"font: 700 24pt \"Segoe UI\";\n"
+"")
+
+        self.horizontalLayout_9.addWidget(self.Label_Welcome)
+
+
+        self.verticalLayout_20.addWidget(self.frame_Welcome_Note)
+
+        self.frame_Promo = QFrame(self.frame_Home)
+        self.frame_Promo.setObjectName(u"frame_Promo")
+        self.frame_Promo.setFrameShape(QFrame.NoFrame)
+        self.frame_Promo.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_26 = QVBoxLayout(self.frame_Promo)
+        self.verticalLayout_26.setSpacing(0)
+        self.verticalLayout_26.setObjectName(u"verticalLayout_26")
+        self.verticalLayout_26.setContentsMargins(0, 0, 0, 0)
+        self.Promo_Label = QLabel(self.frame_Promo)
+        self.Promo_Label.setObjectName(u"Promo_Label")
+        self.Promo_Label.setStyleSheet(u"background-color: rgb(255, 255, 255);")
+
+        self.verticalLayout_26.addWidget(self.Promo_Label)
+
+
+        self.verticalLayout_20.addWidget(self.frame_Promo)
+
+
+        self.Home_Layout.addWidget(self.frame_Home)
+
+        self.stackedWidget.addWidget(self.Home_Page)
         self.Profile_Page = QWidget()
         self.Profile_Page.setObjectName(u"Profile_Page")
         self.Profile_Details_Label = QLabel(self.Profile_Page)
@@ -1294,7 +1353,7 @@ class Ui_MainWindow(object):
         self.btn_details_save.setIcon(icon6)
         self.label_promo = QLabel(self.Profile_Page)
         self.label_promo.setObjectName(u"label_promo")
-        self.label_promo.setGeometry(QRect(710, 20, 471, 591))
+        self.label_promo.setGeometry(QRect(740, 20, 441, 591))
         self.layoutWidget1 = QWidget(self.Profile_Page)
         self.layoutWidget1.setObjectName(u"layoutWidget1")
         self.layoutWidget1.setGeometry(QRect(30, 280, 350, 61))
@@ -1490,9 +1549,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_11.addWidget(self.Appointment_frame)
 
         self.stackedWidget.addWidget(self.Appointment_Page)
-        self.Home_Page = QWidget()
-        self.Home_Page.setObjectName(u"Home_Page")
-        self.stackedWidget.addWidget(self.Home_Page)
         self.Lab_test_Booking = QWidget()
         self.Lab_test_Booking.setObjectName(u"Lab_test_Booking")
         self.verticalLayout_18 = QVBoxLayout(self.Lab_test_Booking)
@@ -1845,6 +1901,214 @@ class Ui_MainWindow(object):
         self.verticalLayout_18.addWidget(self.Lab_test_list)
 
         self.stackedWidget.addWidget(self.Lab_test_Booking)
+        self.Medicine_Order = QWidget()
+        self.Medicine_Order.setObjectName(u"Medicine_Order")
+        self.verticalLayout_21 = QVBoxLayout(self.Medicine_Order)
+        self.verticalLayout_21.setSpacing(0)
+        self.verticalLayout_21.setObjectName(u"verticalLayout_21")
+        self.verticalLayout_21.setContentsMargins(0, 0, 0, 0)
+        self.Order_Layout = QFrame(self.Medicine_Order)
+        self.Order_Layout.setObjectName(u"Order_Layout")
+        self.Order_Layout.setFrameShape(QFrame.NoFrame)
+        self.Order_Layout.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_22 = QVBoxLayout(self.Order_Layout)
+        self.verticalLayout_22.setSpacing(5)
+        self.verticalLayout_22.setObjectName(u"verticalLayout_22")
+        self.verticalLayout_22.setContentsMargins(5, 5, 5, 5)
+        self.Order_Label = QFrame(self.Order_Layout)
+        self.Order_Label.setObjectName(u"Order_Label")
+        self.Order_Label.setMinimumSize(QSize(0, 30))
+        self.Order_Label.setMaximumSize(QSize(16777215, 30))
+        self.Order_Label.setFrameShape(QFrame.StyledPanel)
+        self.Order_Label.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_10 = QHBoxLayout(self.Order_Label)
+        self.horizontalLayout_10.setSpacing(0)
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.horizontalLayout_10.setContentsMargins(0, 0, 0, 0)
+        self.Title_Order = QLabel(self.Order_Label)
+        self.Title_Order.setObjectName(u"Title_Order")
+        self.Title_Order.setStyleSheet(u"border-radius:5px;\n"
+"color: rgb(98, 114, 164);\n"
+"font: 700 14pt \"Segoe UI\";")
+
+        self.horizontalLayout_10.addWidget(self.Title_Order)
+
+
+        self.verticalLayout_22.addWidget(self.Order_Label)
+
+        self.Order_Search = QFrame(self.Order_Layout)
+        self.Order_Search.setObjectName(u"Order_Search")
+        self.Order_Search.setMinimumSize(QSize(0, 45))
+        self.Order_Search.setMaximumSize(QSize(16777215, 45))
+        self.Order_Search.setFrameShape(QFrame.NoFrame)
+        self.Order_Search.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_11 = QHBoxLayout(self.Order_Search)
+        self.horizontalLayout_11.setSpacing(5)
+        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
+        self.horizontalLayout_11.setContentsMargins(0, 0, 0, 0)
+        self.frame_search_text = QFrame(self.Order_Search)
+        self.frame_search_text.setObjectName(u"frame_search_text")
+        self.frame_search_text.setMinimumSize(QSize(0, 45))
+        self.frame_search_text.setMaximumSize(QSize(16777215, 45))
+        self.frame_search_text.setFrameShape(QFrame.NoFrame)
+        self.frame_search_text.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_13 = QHBoxLayout(self.frame_search_text)
+        self.horizontalLayout_13.setSpacing(0)
+        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
+        self.horizontalLayout_13.setContentsMargins(0, 0, 0, 0)
+        self.medicine_search = QLineEdit(self.frame_search_text)
+        self.medicine_search.setObjectName(u"medicine_search")
+        self.medicine_search.setMinimumSize(QSize(0, 45))
+        self.medicine_search.setMaximumSize(QSize(16777215, 45))
+
+        self.horizontalLayout_13.addWidget(self.medicine_search)
+
+
+        self.horizontalLayout_11.addWidget(self.frame_search_text)
+
+        self.frame_search_btn = QFrame(self.Order_Search)
+        self.frame_search_btn.setObjectName(u"frame_search_btn")
+        self.frame_search_btn.setMinimumSize(QSize(130, 45))
+        self.frame_search_btn.setMaximumSize(QSize(130, 45))
+        self.frame_search_btn.setFrameShape(QFrame.StyledPanel)
+        self.frame_search_btn.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_14 = QHBoxLayout(self.frame_search_btn)
+        self.horizontalLayout_14.setSpacing(0)
+        self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
+        self.horizontalLayout_14.setContentsMargins(0, 0, 0, 0)
+        self.btn_search_Medicine = QPushButton(self.frame_search_btn)
+        self.btn_search_Medicine.setObjectName(u"btn_search_Medicine")
+        self.btn_search_Medicine.setMinimumSize(QSize(0, 45))
+        self.btn_search_Medicine.setMaximumSize(QSize(16777215, 45))
+        self.btn_search_Medicine.setIcon(icon7)
+
+        self.horizontalLayout_14.addWidget(self.btn_search_Medicine)
+
+
+        self.horizontalLayout_11.addWidget(self.frame_search_btn)
+
+
+        self.verticalLayout_22.addWidget(self.Order_Search)
+
+        self.Order_Display = QFrame(self.Order_Layout)
+        self.Order_Display.setObjectName(u"Order_Display")
+        self.Order_Display.setFrameShape(QFrame.NoFrame)
+        self.Order_Display.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_15 = QHBoxLayout(self.Order_Display)
+        self.horizontalLayout_15.setSpacing(5)
+        self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
+        self.horizontalLayout_15.setContentsMargins(5, 5, 5, 5)
+        self.frame_Medicie_Search = QFrame(self.Order_Display)
+        self.frame_Medicie_Search.setObjectName(u"frame_Medicie_Search")
+        self.frame_Medicie_Search.setFrameShape(QFrame.NoFrame)
+        self.frame_Medicie_Search.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_25 = QVBoxLayout(self.frame_Medicie_Search)
+        self.verticalLayout_25.setSpacing(0)
+        self.verticalLayout_25.setObjectName(u"verticalLayout_25")
+        self.verticalLayout_25.setContentsMargins(0, 0, 0, 0)
+        self.SearchMedicine = QListWidget(self.frame_Medicie_Search)
+        self.SearchMedicine.setObjectName(u"SearchMedicine")
+
+        self.verticalLayout_25.addWidget(self.SearchMedicine)
+
+
+        self.horizontalLayout_15.addWidget(self.frame_Medicie_Search)
+
+        self.frame_Ordered_Medicine = QFrame(self.Order_Display)
+        self.frame_Ordered_Medicine.setObjectName(u"frame_Ordered_Medicine")
+        self.frame_Ordered_Medicine.setFrameShape(QFrame.StyledPanel)
+        self.frame_Ordered_Medicine.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_23 = QVBoxLayout(self.frame_Ordered_Medicine)
+        self.verticalLayout_23.setSpacing(5)
+        self.verticalLayout_23.setObjectName(u"verticalLayout_23")
+        self.verticalLayout_23.setContentsMargins(0, 0, 0, 0)
+        self.frame_title = QFrame(self.frame_Ordered_Medicine)
+        self.frame_title.setObjectName(u"frame_title")
+        self.frame_title.setMinimumSize(QSize(0, 30))
+        self.frame_title.setMaximumSize(QSize(16777215, 30))
+        self.frame_title.setFrameShape(QFrame.NoFrame)
+        self.frame_title.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_16 = QHBoxLayout(self.frame_title)
+        self.horizontalLayout_16.setSpacing(0)
+        self.horizontalLayout_16.setObjectName(u"horizontalLayout_16")
+        self.horizontalLayout_16.setContentsMargins(0, 0, 0, 0)
+        self.title_label = QLabel(self.frame_title)
+        self.title_label.setObjectName(u"title_label")
+        self.title_label.setStyleSheet(u"color: rgb(255, 255, 255);\n"
+"background-color: rgb(98, 114, 164);\n"
+"font: 700 14pt \"Segoe UI\";\n"
+"border-radius : 5px;")
+        self.title_label.setMargin(0)
+
+        self.horizontalLayout_16.addWidget(self.title_label)
+
+
+        self.verticalLayout_23.addWidget(self.frame_title)
+
+        self.frame_ordered_Med = QFrame(self.frame_Ordered_Medicine)
+        self.frame_ordered_Med.setObjectName(u"frame_ordered_Med")
+        self.frame_ordered_Med.setFrameShape(QFrame.StyledPanel)
+        self.frame_ordered_Med.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_24 = QVBoxLayout(self.frame_ordered_Med)
+        self.verticalLayout_24.setSpacing(0)
+        self.verticalLayout_24.setObjectName(u"verticalLayout_24")
+        self.verticalLayout_24.setContentsMargins(0, 0, 0, 0)
+        self.ordered_List = QListWidget(self.frame_ordered_Med)
+        self.ordered_List.setObjectName(u"ordered_List")
+
+        self.verticalLayout_24.addWidget(self.ordered_List)
+
+
+        self.verticalLayout_23.addWidget(self.frame_ordered_Med)
+
+        self.frame_btn_oirder = QFrame(self.frame_Ordered_Medicine)
+        self.frame_btn_oirder.setObjectName(u"frame_btn_oirder")
+        self.frame_btn_oirder.setMinimumSize(QSize(0, 45))
+        self.frame_btn_oirder.setMaximumSize(QSize(16777215, 45))
+        self.frame_btn_oirder.setFrameShape(QFrame.NoFrame)
+        self.frame_btn_oirder.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_17 = QHBoxLayout(self.frame_btn_oirder)
+        self.horizontalLayout_17.setSpacing(5)
+        self.horizontalLayout_17.setObjectName(u"horizontalLayout_17")
+        self.horizontalLayout_17.setContentsMargins(0, 0, 5, 0)
+        self.Total_Amount_Label = QLabel(self.frame_btn_oirder)
+        self.Total_Amount_Label.setObjectName(u"Total_Amount_Label")
+        self.Total_Amount_Label.setStyleSheet(u"border-radius:5px;\n"
+"color: rgb(98, 114, 164);\n"
+"font: 700 14pt \"Segoe UI\";")
+
+        self.horizontalLayout_17.addWidget(self.Total_Amount_Label)
+
+        self.Total_Amount_Input = QLineEdit(self.frame_btn_oirder)
+        self.Total_Amount_Input.setObjectName(u"Total_Amount_Input")
+        self.Total_Amount_Input.setMinimumSize(QSize(0, 45))
+        self.Total_Amount_Input.setMaximumSize(QSize(16777215, 45))
+
+        self.horizontalLayout_17.addWidget(self.Total_Amount_Input)
+
+        self.btn_order = QPushButton(self.frame_btn_oirder)
+        self.btn_order.setObjectName(u"btn_order")
+        self.btn_order.setMinimumSize(QSize(130, 45))
+        self.btn_order.setMaximumSize(QSize(130, 45))
+        icon8 = QIcon()
+        icon8.addFile(u":/icons/images/icons/cil-cart.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_order.setIcon(icon8)
+
+        self.horizontalLayout_17.addWidget(self.btn_order)
+
+
+        self.verticalLayout_23.addWidget(self.frame_btn_oirder)
+
+
+        self.horizontalLayout_15.addWidget(self.frame_Ordered_Medicine)
+
+
+        self.verticalLayout_22.addWidget(self.Order_Display)
+
+
+        self.verticalLayout_21.addWidget(self.Order_Layout)
+
+        self.stackedWidget.addWidget(self.Medicine_Order)
 
         self.verticalLayout.addWidget(self.stackedWidget)
 
@@ -1962,7 +2226,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(4)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -2016,6 +2280,8 @@ class Ui_MainWindow(object):
         self.closeAppBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Close", None))
 #endif // QT_CONFIG(tooltip)
         self.closeAppBtn.setText("")
+        self.Label_Welcome.setText(QCoreApplication.translate("MainWindow", u"Dear Piyush , Welcome to MedTech", None))
+        self.Promo_Label.setText("")
         self.Profile_Details_Label.setText(QCoreApplication.translate("MainWindow", u"Profile Details", None))
         self.Pic_Upload.setText("")
         self.btn_upload.setText(QCoreApplication.translate("MainWindow", u"Upload", None))
@@ -2036,7 +2302,7 @@ class Ui_MainWindow(object):
         self.Gender_Input.setItemText(2, QCoreApplication.translate("MainWindow", u"Female", None))
 
         self.BirthDate_Label.setText(QCoreApplication.translate("MainWindow", u"Birth Date", None))
-        self.Title_Label.setText(QCoreApplication.translate("MainWindow", u" Search Doctor And Book Appointment", None))
+        self.Title_Label.setText(QCoreApplication.translate("MainWindow", u" Search Doctor And Book Appoinment", None))
         self.btn_search.setText(QCoreApplication.translate("MainWindow", u"Search", None))
         self.btn_covid.setText("")
         self.btn_cancer.setText("")
@@ -2056,6 +2322,11 @@ class Ui_MainWindow(object):
         self.pushButton_17.setText("")
         self.pushButton_18.setText("")
         self.pushButton_11.setText("")
+        self.Title_Order.setText(QCoreApplication.translate("MainWindow", u" Search Medicine And Order", None))
+        self.btn_search_Medicine.setText(QCoreApplication.translate("MainWindow", u"Search", None))
+        self.title_label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Your Cart <img src=\":/icons/images/icons/cil-cart.png\"/></p></body></html>", None))
+        self.Total_Amount_Label.setText(QCoreApplication.translate("MainWindow", u"Total Amount :", None))
+        self.btn_order.setText(QCoreApplication.translate("MainWindow", u"Order ", None))
         self.btn_logout.setText(QCoreApplication.translate("MainWindow", u"Logout", None))
         self.creditsLabel.setText(QCoreApplication.translate("MainWindow", u"By: Raj Dalsaniya", None))
         self.version.setText(QCoreApplication.translate("MainWindow", u"v0.0.1(Beta)", None))

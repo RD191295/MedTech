@@ -1,3 +1,20 @@
+# ///////////////////////////////////////////////////////////////
+#
+# BY: RAJ DALSANIYA
+# PROJECT MADE WITH: Qt Designer and PySide6
+# PROJECT NAME: DOCTOR APPOINTMENT AND LAB TEST BOOKING SYSTEM
+# V: 1.0.0
+#
+# This project can be used freely for all uses, as long as they maintain the
+# respective credits only in the Python scripts, any information in the visual
+# interface (GUI) can be modified without any implication.
+#
+# There are limitations on Qt licenses if you want to use your products
+# commercially, I recommend reading them on the official website:
+# https://doc.qt.io/qtforpython/licenses.html
+#
+# ///////////////////////////////////////////////////////////////
+
 # IMPORT MAIN FILE
 # /////////////////////////////
 
@@ -21,10 +38,7 @@ class UIFunctions_Login(QMainWindow):
 
         # MOVE WINDOW / MAXIMIZE / RESTORE
         def moveWindow(event):
-            # IF MAXIMIZED CHANGE TO NORMAL
-            if UIFunctions.returStatus(self):
-                UIFunctions.maximize_restore(self)
-            # MOVE WINDOW
+              # MOVE WINDOW
             if event.buttons() == Qt.LeftButton:
                 self.move(self.pos() + event.globalPos() - self.dragPos)
                 self.dragPos = event.globalPos()
