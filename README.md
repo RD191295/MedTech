@@ -18,10 +18,10 @@ I would love to develop Medtech together with others! Best way to get started is
 
 # 🆘 Where to get help
 
-You can contact me on my email id or other social media. check out my ![Github profile page]("https://github.com/RD191295") for more details!!
+You can contact me on my email id or other social media. check out my [Github profile page]("https://github.com/RD191295") for more details!!
 
 # 📜 License
 
 There are limitations on Qt licenses if you want to use for your products commercially, I recommend reading them on the official website: 
-![More on Qt License Here]("https://doc.qt.io/qtforpython/licenses.html")
+[More on Qt License Here]("https://doc.qt.io/qtforpython/licenses.html")
 
