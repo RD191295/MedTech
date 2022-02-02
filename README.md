@@ -16,7 +16,7 @@ I would love to develop Medtech together with others! Best way to get started is
 
 <br>
 
-![Repobeats analytics image](https://repobeats.axiom.co/api/embed/635c57b743efe649cadceba6a2e6a956663f96dd.svg "Repobeats analytics image")
+![Repobeats analytics image](https://repobeats.axiom.co/api/embed/ba8a1fcba1586f96b40e8037163fb274380a23da.svg "Repobeats analytics image")
 
 # 🆘 Where to get help
 
