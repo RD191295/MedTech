@@ -7,7 +7,7 @@
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/zenml)](https://pypi.org/project/zenml/)
 [![PyPI Status](https://pepy.tech/badge/zenml)](https://pepy.tech/project/zenml)
 ![GitHub](https://img.shields.io/github/license/zenml-io/zenml)
-[![Interrogate](docs/interrogate.svg)](https://interrogate.readthedocs.io/en/latest/)
+![Interrogate](docs/interrogate.svg)](https://interrogate.readthedocs.io/en/latest/)
 ![Main Workflow Tests](https://github.com/RD191295/MedTech/actions/workflows/main.yml/badge.svg)
 
 <div align="center"> Give us a 
