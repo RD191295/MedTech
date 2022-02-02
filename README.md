@@ -5,7 +5,14 @@
 **Medtech** is an app devloped using Qt Framework and Python.It is prototype app where you can book doctor appointment, Lab test Booking and order medicine etc. **Medtech** is created with Qt Opensource and Python and other various Library like Sqlite3,Openpyxl and etc. This project is purely for Eduction Purpose only. I am not monitizing this or have plan for this!!
 
 
+# 🗺 Roadmap
+Future work About this would be as below :
+   1. Interegrate Payment Network with this app for online Payment
+   2. Show history for your booking in app itself.
+   3. send notification in telegram for your booking as well as email
+   4.  Many more others in Future.
 
+ I will try to add this as soon as possible. This is totally for education about Qt and Python. Will share more update once any of functionallity is completed. 
 
 
 # 🙋‍♀️ Contributing & Community
