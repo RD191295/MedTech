@@ -1,6 +1,4 @@
-<div align="center">
-    <img src="">
-</div>
+
 
 # 👀 What is Medtech?
 
@@ -24,5 +22,6 @@ You can contact me on my email id or other social media. check out my Github pro
 
 # 📜 License
 
-There are limitations on Qt licenses if you want to use for your products commercially, I recommend reading them on the official website: ![More on Qt License Here](https://doc.qt.io/qtforpython/licenses.html)
+There are limitations on Qt licenses if you want to use for your products commercially, I recommend reading them on the official website: 
+![More on Qt License Here]("https://doc.qt.io/qtforpython/licenses.html")
 
