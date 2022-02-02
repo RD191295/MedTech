@@ -4,7 +4,7 @@
 
 **Medtech** is an app devloped using Qt Framework and Python.It is prototype app where you can book doctor appointment, Lab test Booking and order medicine etc. **Medtech** is created with Qt Opensource and Python and other various Library like Sqlite3,Openpyxl and etc. This project is purely for Eduction Purpose only. I am not monitizing this or have plan for this!!
 
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/zenml)](https://pypi.org/project/zenml/)
+[![PyPI - Python Version](https://img.shields.io/pypi)]
 [![PyPI Status](https://pepy.tech/badge/zenml)](https://pepy.tech/project/zenml)
 ![GitHub](https://img.shields.io/github/license/zenml-io/zenml)
 ![Interrogate](docs/interrogate.svg)](https://interrogate.readthedocs.io/en/latest/)
