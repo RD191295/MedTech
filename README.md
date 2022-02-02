@@ -4,6 +4,12 @@
 
 **Medtech** is an app devloped using Qt Framework and Python.It is prototype app where you can book doctor appointment, Lab test Booking and order medicine etc. **Medtech** is created with Qt Opensource and Python and other various Library like Sqlite3,Openpyxl and etc. This project is purely for Eduction Purpose only. I am not monitizing this or have plan for this!!
 
+<div align="center"> Give us a 
+    <img width="25" src="https://cdn.iconscout.com/icon/free/png-256/github-153-675523.png" alt="Slack"/>
+<b>GitHub star</b> to show your love
+</div>
+
+
 
 # 🗺 Roadmap
 Future work About this would be as below :
